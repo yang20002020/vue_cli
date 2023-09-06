@@ -8,14 +8,24 @@
       <el-button type="warning">警告按钮</el-button>
       <el-button type="danger">危险按钮</el-button>
     </el-row>
-    <br>
-    
+    <br />
+
     <!-- table 表格 -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="date" label="日期" width="180"> </el-table-column>
       <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
       <el-table-column prop="address" label="地址"> </el-table-column>
     </el-table>
+    <br />
+    <!-- pagination 分页 -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      background
+      layout="sizes,prev, pager, next,jumper,total"
+      :total="1000"
+    >
+    </el-pagination>
   </div>
 </template>
 
@@ -47,6 +57,18 @@ export default {
       ],
     };
   },
+
+  methods: {
+    // 函数参数代表 每页条数
+    handleSizeChange: function (val) {
+       alert("每一页条数"+val)
+    },
+    // 函数参数代表当前页
+    handleCurrentChange: function (val) {
+       alert("当前页"+val)
+    }
+
+  }
 };
 </script>
 
