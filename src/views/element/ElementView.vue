@@ -9,6 +9,7 @@
       <el-button type="danger">危险按钮</el-button>
     </el-row>
     <br>
+    
     <!-- table 表格 -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="date" label="日期" width="180"> </el-table-column>
