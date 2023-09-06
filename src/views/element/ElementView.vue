@@ -10,6 +10,7 @@
     </el-row>
     <br />
 
+    
     <!-- table 表格 -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="date" label="日期" width="180"> </el-table-column>
@@ -17,7 +18,7 @@
       <el-table-column prop="address" label="地址"> </el-table-column>
     </el-table>
     <br />
-    <!-- pagination 分页 -->
+    <!-- pagination 分页  -->
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
