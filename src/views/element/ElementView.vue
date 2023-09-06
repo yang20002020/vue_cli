@@ -26,6 +26,21 @@
       :total="1000"
     >
     </el-pagination>
+
+    <br />
+    <!-- Dialog 对话框 -->
+    <!-- table -->
+    <el-button type="text" @click="dialogTableVisible = true"
+      >打开嵌套表格的 Dialog</el-button
+    >
+
+    <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+      <el-table :data="gridData">
+        <el-table-column  property="date"  label="日期" width="150"></el-table-column>
+        <el-table-column property="name"  label="姓名" width="200"></el-table-column>
+        <el-table-column property="address" label="地址"></el-table-column>
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 
@@ -55,20 +70,43 @@ export default {
           address: "上海市普陀区金沙江路 1516 弄",
         },
       ],
+      //  对话框
+      gridData: [
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+      ],
+      dialogTableVisible: false,
     };
   },
 
   methods: {
     // 函数参数代表 每页条数
     handleSizeChange: function (val) {
-       alert("每一页条数"+val)
+      alert("每一页条数" + val);
     },
     // 函数参数代表当前页
     handleCurrentChange: function (val) {
-       alert("当前页"+val)
-    }
-
-  }
+      alert("当前页" + val);
+    },
+  },
 };
 </script>
 
