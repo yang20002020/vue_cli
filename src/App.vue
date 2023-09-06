@@ -1,6 +1,6 @@
 <template>
   <div >
-    {{message}}
+    <!-- {{message}} -->
    <element-view></element-view>
   </div>
 </template>
