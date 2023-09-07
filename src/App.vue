@@ -1,26 +1,23 @@
 <template>
-  <div >
+  <div>
     <!-- {{message}} -->
-   <element-view></element-view>
+    <element-view></element-view>
   </div>
 </template>
 
 <script>
 import ElementView from "@/views/element/ElementView";
 export default {
-  components:{ElementView},
+  components: { ElementView },
   data() {
     return {
-      message:"hello vue222"
-    }
+      message: "hello vue222",
+    };
   },
 
-  methods: {
-    
-  }
- }
+  methods: {},
+};
 </script>
 
 <style>
-
 </style>
