@@ -169,7 +169,7 @@ export default {
     },
     // 函数参数代表当前页
     handleCurrentChange: function (val) {
-      alert("当前页" + val);
+      alert("当前页:" + val);
     },
     //表单
     onSubmit: function () {
