@@ -1,14 +1,14 @@
 <template>
   <el-container style="height: 700px; border: 1px solid #eee">
-    <el-header style="font-size: 40px; background-color: rgb(238, 241, 246)"
-      >智能学习辅导系统</el-header>
+    <el-header style="font-size: 40px; background-color: rgb(238, 241, 246)">智能学习辅导系统</el-header>
     <el-container>
       <el-aside width="200px">
         <!-- 从官网复制的代码 -->
         <el-menu :default-openeds="['1', '3']">
           <el-submenu index="1">
             <template slot="title"
-              ><i class="el-icon-message"></i>系统信息管理</template
+            ><i class="el-icon-message"></i>系统信息管理
+            </template
             >
             <el-menu-item-group>
               <template slot="title">部门管理</template>
@@ -40,7 +40,8 @@
           </el-submenu>
           <el-submenu index="3">
             <template slot="title"
-              ><i class="el-icon-setting"></i>导航三</template
+            ><i class="el-icon-setting"></i>导航三
+            </template
             >
             <el-menu-item-group>
               <template slot="title">分组一</template>
@@ -60,42 +61,58 @@
       </el-aside>
 
       <el-main>
-        <el-table :data="tableData">
-          <el-table-column
-            prop="name"
-            label="姓名"
-            width="180"
-          ></el-table-column>
-          <el-table-column
-            prop="image"
-            label="图像"
-            width="180"
-          ></el-table-column>
-          <el-table-column
-            prop="gender"
-            label="性别"
-            width="140"
-          ></el-table-column>
-          <el-table-column
-            prop="job"
-            label="职位"
-            width="140"
-          ></el-table-column>
-          <el-table-column
-            prop="entrydate"
-            label="入职日期"
-            width="180"
-          ></el-table-column>
-          <el-table-column
-            prop="updatetime"
-            label="最后操作时间"
-            width="230"
-          ></el-table-column>
+        <!--        表单-->
+        <el-form :inline="true" :model="serchForm" class="demo-form-inline">
+          <el-form-item label="姓名">
+            <el-input v-model="serchForm.name" placeholder="姓名"></el-input>
+          </el-form-item>
+          <el-form-item label="性别">
+            <el-select v-model="serchForm.gender" placeholder="性别">
+              <el-option label="男" value="1"></el-option>
+              <el-option label="女" value="2"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">查询</el-button>
+          </el-form-item>
+        </el-form>
+
+        <!--        表格-->
+        <el-table :data="tableData" border>
+          <el-table-column prop="name" label="姓名" width="180"></el-table-column>
+          <el-table-column prop="image" label="图像" width="180"></el-table-column>
+          <el-table-column prop="gender" label="性别" width="140"></el-table-column>
+          <el-table-column prop="job" label="职位" width="140"></el-table-column>
+
+          <el-table-column prop="entrydate" label="入职日期" width="180">
+            <!--            日期选择器-->
+            <el-date-picker
+                v-model="serchForm.entrydate"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期">
+            </el-date-picker>
+          </el-table-column>
+
+          <el-table-column prop="updatetime" label="最后操作时间" width="230"></el-table-column>
           <el-table-column label="操作">
             <el-button type="primary" size="mini">编辑</el-button>
             <el-button type="danger" size="mini">删除</el-button>
           </el-table-column>
         </el-table>
+        <br>
+        <br>
+        <!--        分页条-->
+        <!-- pagination 分页  -->
+        <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            background
+            layout="sizes,prev, pager, next,jumper,total"
+            :total="1000">
+        </el-pagination>
+
       </el-main>
     </el-container>
   </el-container>
@@ -104,14 +121,32 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      tableData:[]
-    }
+      tableData: [],
+      serchForm: {
+        name: "",
+        gender: "",
+        entrydate: [],
+      }
+    };
+  },
+  methods: {
+    onSubmit: function () {
+      alert("查询数据");
+    },
+    // 函数参数代表 每页条数
+    handleSizeChange: function (val) {
+      alert("每一页条数" + val);
+    },
+    // 函数参数代表当前页
+    handleCurrentChange: function (val) {
+      alert("当前页" + val);
+    },
   }
 };
 </script>
 
 
-<style >
+<style>
 </style>
