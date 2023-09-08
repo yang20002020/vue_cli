@@ -2,14 +2,11 @@
   <el-container style="height: 700px; border: 1px solid #eee">
     <el-header style="font-size: 40px; background-color: rgb(238, 241, 246)">复域笔记</el-header>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="230px" style="border: 1px solid #eee">
         <!-- 从官网复制的代码 -->
         <el-menu :default-openeds="['1', '3']">
           <el-submenu index="1">
-            <template slot="title"
-            ><i class="el-icon-message"></i>系统信息管理
-            </template
-            >
+            <template slot="title"><i class="el-icon-message"></i>系统信息管理</template>
             <el-menu-item-group>
               <template slot="title">部门管理</template>
               <el-menu-item index="1-1">选项1</el-menu-item>
@@ -89,8 +86,17 @@
         <!--        表格-->
         <el-table :data="tableData" border>
           <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-          <el-table-column prop="image" label="图像" width="180"></el-table-column>
-          <el-table-column prop="gender" label="性别" width="140"></el-table-column>
+          <el-table-column prop="image" label="图像" width="180">
+
+            <template slot-scope="scope">
+              <img :src="scope.row.image" width="100px" height="70px">
+            </template>
+          </el-table-column>
+          <el-table-column prop="gender" label="性别" width="140">
+            <template slot-scope="scope">
+              {{scope.row.gender==1?'男':'女'}}
+            </template>
+          </el-table-column>
           <el-table-column prop="job" label="职位" width="140"></el-table-column>
           <el-table-column prop="entrydate" label="入职时间" width="180"></el-table-column>
           <el-table-column prop="updatetime" label="最后操作时间" width="230"></el-table-column>
