@@ -8,7 +8,7 @@
 
 <script>
 // import ElementView from "@/views/element/ElementView";
- import EmpView from "@/views/tlias/EmpView";
+ import EmpView from "./views/tlias/EmpView.vue";
 export default {
   // components: { ElementView },
   components: { EmpView },

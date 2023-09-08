@@ -1,6 +1,6 @@
 <template>
   <el-container style="height: 700px; border: 1px solid #eee">
-    <el-header style="font-size: 40px; background-color: rgb(238, 241, 246)">智能学习辅导系统</el-header>
+    <el-header style="font-size: 40px; background-color: rgb(238, 241, 246)">复域笔记</el-header>
     <el-container>
       <el-aside width="200px">
         <!-- 从官网复制的代码 -->
@@ -62,16 +62,25 @@
 
       <el-main>
         <!--        表单-->
-        <el-form :inline="true" :model="serchForm" class="demo-form-inline">
+        <el-form :inline="true" :model="searchForm" class="demo-form-inline">
           <el-form-item label="姓名">
-            <el-input v-model="serchForm.name" placeholder="姓名"></el-input>
+            <el-input v-model="searchForm.name" placeholder="姓名"></el-input>
           </el-form-item>
           <el-form-item label="性别">
-            <el-select v-model="serchForm.gender" placeholder="性别">
+            <el-select v-model="searchForm.gender" placeholder="性别">
               <el-option label="男" value="1"></el-option>
               <el-option label="女" value="2"></el-option>
             </el-select>
           </el-form-item>
+          <!--        日期选择-->
+          <el-date-picker
+              v-model="searchForm.entrydate"
+              type="daterange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期">
+          </el-date-picker>
+          <!--    以上    日期选择-->
           <el-form-item>
             <el-button type="primary" @click="onSubmit">查询</el-button>
           </el-form-item>
@@ -83,18 +92,7 @@
           <el-table-column prop="image" label="图像" width="180"></el-table-column>
           <el-table-column prop="gender" label="性别" width="140"></el-table-column>
           <el-table-column prop="job" label="职位" width="140"></el-table-column>
-
-          <el-table-column prop="entrydate" label="入职日期" width="180">
-            <!--            日期选择器-->
-            <el-date-picker
-                v-model="serchForm.entrydate"
-                type="daterange"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期">
-            </el-date-picker>
-          </el-table-column>
-
+          <el-table-column prop="entrydate" label="入职时间" width="180"></el-table-column>
           <el-table-column prop="updatetime" label="最后操作时间" width="230"></el-table-column>
           <el-table-column label="操作">
             <el-button type="primary" size="mini">编辑</el-button>
@@ -120,11 +118,13 @@
 
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       tableData: [],
-      serchForm: {
+      searchForm: {
         name: "",
         gender: "",
         entrydate: [],
@@ -143,8 +143,16 @@ export default {
     handleCurrentChange: function (val) {
       alert("当前页" + val);
     },
+
+  },
+  mounted() {
+    //发送异步请求,获取数据
+    axios.get("https://mock.apifox.cn/m1/3235583-0-default/element_emp_list").then((result) => {
+      this.tableData = result.data.data;
+    });
   }
-};
+}
+
 </script>
 
 
